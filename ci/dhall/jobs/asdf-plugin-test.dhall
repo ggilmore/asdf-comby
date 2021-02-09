@@ -11,12 +11,13 @@ in  Job::{
       }
     , runs-on = GitHubActions.RunsOn.Type.`${{ matrix.os }}`
     , steps =
-      [ GitHubActions.Step::{
-        , name = Some "asdf-plugin-test"
-        , uses = Some "asdf-vm/actions/plugin-test@v1.0.0"
-        , `with` = Some (toMap { command = "comby -help" })
-        , env = Some
-            (toMap { GITHUB_API_TOKEN = "\${{ secrets.GITHUB_TOKEN }}" })
-        }
-      ]
+          Setup.ASDFSteps
+        # [ GitHubActions.Step::{
+            , name = Some "asdf-plugin-test"
+            , uses = Some "asdf-vm/actions/plugin-test@v1.0.0"
+            , `with` = Some (toMap { command = "comby -help" })
+            , env = Some
+                (toMap { GITHUB_API_TOKEN = "\${{ secrets.GITHUB_TOKEN }}" })
+            }
+          ]
     }

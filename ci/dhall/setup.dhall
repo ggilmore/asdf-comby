@@ -5,7 +5,10 @@ let ASDFSteps =
         , name = Some "Install asdf"
         , uses = Some "asdf-vm/actions/setup@v1.0.1"
         }
-      , GitHubActions.Step::{
+      ]
+
+let InstallSteps =
+      [ GitHubActions.Step::{
         , name = Some "Install asdf plugins"
         , run = Some "./ci/asdf-add-plugins.sh"
         }
@@ -25,7 +28,7 @@ let Checkout =
       , uses = Some "actions/checkout@v2"
       }
 
-let SetupSteps = [ Checkout ] # ASDFSteps
+let SetupSteps = [ Checkout ] # ASDFSteps # InstallSteps
 
 let Job =
       { Type = GitHubActions.Job.Type
@@ -35,4 +38,4 @@ let Job =
         with steps = Some SetupSteps
       }
 
-in  { SetupSteps, Job }
+in  { SetupSteps, Job, ASDFSteps }
