@@ -58,7 +58,7 @@ download_release() {
     platform=$(get_platform)
 
     # TODO: Adapt the release URL convention for comby
-    url="$GH_REPO/releases/download/v${version}/comby-${version}-${platform}.tar.gz"
+    url="$GH_REPO/releases/download/${version}/comby-${version}-${platform}.tar.gz"
 
     echo "* Downloading comby release $version..."
     curl "${curl_opts[@]}" -o "$filename" -C - "$url" || fail "Could not download $url"

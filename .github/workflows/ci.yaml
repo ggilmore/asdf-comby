@@ -4,15 +4,6 @@ jobs:
         name: asdf plugin test
         runs-on: "${{ matrix.os }}"
         steps:
-            - uses: "actions/checkout@v2"
-            - name: Install asdf
-              uses: "asdf-vm/actions/setup@v1.0.1"
-            - name: Install asdf plugins
-              run: "./ci/asdf-add-plugins.sh"
-            - name: Install asdf tools versions
-              run: "./ci/asdf-install.sh"
-            - name: Install packages
-              run: just install
             - env:
                   GITHUB_API_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
               name: asdf-plugin-test
