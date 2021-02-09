@@ -2,11 +2,11 @@
 jobs:
     asdf-plugin-test:
         name: asdf plugin test
-        runs-on: ubuntu-latest
+        runs-on: "${{ matrix.os }}"
         steps:
             - uses: "actions/checkout@v2"
             - name: Install asdf
-              uses: "asdf-vm/actions/setup@v1.0.0"
+              uses: "asdf-vm/actions/setup@v1.0.1"
             - name: Install asdf plugins
               run: "./ci/asdf-add-plugins.sh"
             - name: Install asdf tools versions
@@ -18,7 +18,7 @@ jobs:
               name: asdf-plugin-test
               uses: "asdf-vm/actions/plugin-test@v1.0.0"
               with:
-                  command: just --help
+                  command: comby -help
         strategy:
             matrix:
                 os:
@@ -30,7 +30,7 @@ jobs:
         steps:
             - uses: "actions/checkout@v2"
             - name: Install asdf
-              uses: "asdf-vm/actions/setup@v1.0.0"
+              uses: "asdf-vm/actions/setup@v1.0.1"
             - name: Install asdf plugins
               run: "./ci/asdf-add-plugins.sh"
             - name: Install asdf tools versions
@@ -45,7 +45,7 @@ jobs:
         steps:
             - uses: "actions/checkout@v2"
             - name: Install asdf
-              uses: "asdf-vm/actions/setup@v1.0.0"
+              uses: "asdf-vm/actions/setup@v1.0.1"
             - name: Install asdf plugins
               run: "./ci/asdf-add-plugins.sh"
             - name: Install asdf tools versions
@@ -62,7 +62,7 @@ jobs:
         steps:
             - uses: "actions/checkout@v2"
             - name: Install asdf
-              uses: "asdf-vm/actions/setup@v1.0.0"
+              uses: "asdf-vm/actions/setup@v1.0.1"
             - name: Install asdf plugins
               run: "./ci/asdf-add-plugins.sh"
             - name: Install asdf tools versions
@@ -79,7 +79,7 @@ jobs:
         steps:
             - uses: "actions/checkout@v2"
             - name: Install asdf
-              uses: "asdf-vm/actions/setup@v1.0.0"
+              uses: "asdf-vm/actions/setup@v1.0.1"
             - name: Install asdf plugins
               run: "./ci/asdf-add-plugins.sh"
             - name: Install asdf tools versions
@@ -94,7 +94,7 @@ jobs:
         steps:
             - uses: "actions/checkout@v2"
             - name: Install asdf
-              uses: "asdf-vm/actions/setup@v1.0.0"
+              uses: "asdf-vm/actions/setup@v1.0.1"
             - name: Install asdf plugins
               run: "./ci/asdf-add-plugins.sh"
             - name: Install asdf tools versions
@@ -109,7 +109,7 @@ jobs:
         steps:
             - uses: "actions/checkout@v2"
             - name: Install asdf
-              uses: "asdf-vm/actions/setup@v1.0.0"
+              uses: "asdf-vm/actions/setup@v1.0.1"
             - name: Install asdf plugins
               run: "./ci/asdf-add-plugins.sh"
             - name: Install asdf tools versions
