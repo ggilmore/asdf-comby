@@ -100,8 +100,8 @@ install_version() {
 
         test -x "${tool_cmd}" || fail "Expected ${tool_cmd} to be executable."
 
-        if ! "${tool_cmd}" -help; then
-            fail "'${tool_cmd} -help' failed."
+        if ! "${tool_cmd}" -version; then
+            fail "'${tool_cmd} -version' failed."
         fi
 
         echo "comby $version installation was successful!"
