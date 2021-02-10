@@ -77,7 +77,7 @@ install_version() {
 
     # TODO: Adapt this to proper extension and adapt extracting strategy.
     local release_file="$install_path/comby-${version}-${platform}.tar.gz"
-    local install_path_bin="${install_path}"
+    local install_path_bin="${install_path}/bin"
     (
         mkdir -p "$install_path_bin"
         download_release "$version" "$release_file"
