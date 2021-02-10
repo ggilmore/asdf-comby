@@ -2,17 +2,17 @@
 
 set -euo pipefail
 
-# TODO: Ensure this is the correct GitHub homepage where releases can be downloaded for just.
-GH_REPO="https://github.com/casey/just"
+# TODO: Ensure this is the correct GitHub homepage where releases can be downloaded for comby.
+GH_REPO="https://github.com/comby-tools/comby"
 
 fail() {
-    echo -e "asdf-just: $*"
+    echo -e "asdf-comby: $*"
     exit 1
 }
 
 curl_opts=(-fsSL)
 
-# NOTE: You might want to remove this if just is not hosted on GitHub releases.
+# NOTE: You might want to remove this if comby is not hosted on GitHub releases.
 if [ -n "${GITHUB_API_TOKEN:-}" ]; then
     curl_opts=("${curl_opts[@]}" -H "Authorization: token $GITHUB_API_TOKEN")
 fi
@@ -30,7 +30,7 @@ list_github_tags() {
 
 list_all_versions() {
     # TODO: Adapt this. By default we simply list the tag names from GitHub releases.
-    # Change this function if just has other means of determining installable versions.
+    # Change this function if comby has other means of determining installable versions.
     list_github_tags
 }
 
@@ -40,10 +40,10 @@ get_platform() {
     platform="$(uname)"
     case $platform in
     'Linux')
-        platform='unknown-linux-musl'
+        platform='linux'
         ;;
     'Darwin')
-        platform='apple-darwin'
+        platform='macos'
         ;;
     *) ;;
     esac
@@ -57,10 +57,10 @@ download_release() {
     filename="$2"
     platform=$(get_platform)
 
-    # TODO: Adapt the release URL convention for just
-    url="$GH_REPO/releases/download/v${version}/just-v${version}-${platform}.tar.gz"
+    # TODO: Adapt the release URL convention for comby
+    url="$GH_REPO/releases/download/${version}/comby-${version}-${platform}.tar.gz"
 
-    echo "* Downloading just release $version..."
+    echo "* Downloading comby release $version..."
     curl "${curl_opts[@]}" -o "$filename" -C - "$url" || fail "Could not download $url"
 }
 
@@ -72,11 +72,11 @@ install_version() {
     platform=$(get_platform)
 
     if [ "$install_type" != "version" ]; then
-        fail "asdf-just supports release installs only"
+        fail "asdf-comby supports release installs only"
     fi
 
     # TODO: Adapt this to proper extension and adapt extracting strategy.
-    local release_file="$install_path/just-v${version}-${platform}.tar.gz"
+    local release_file="$install_path/comby-${version}-${platform}.tar.gz"
     local install_path_bin="${install_path}/bin"
     (
         mkdir -p "$install_path_bin"
@@ -84,17 +84,24 @@ install_version() {
         tar -xzf "$release_file" -C "${install_path_bin}" || fail "Could not extract $release_file"
         rm "$release_file"
 
+        local tool_cmd_version
+        tool_cmd_version="${install_path_bin}/comby-${version}-${platform}"
+
         local tool_cmd
-        tool_cmd="${install_path_bin}/just"
+        tool_cmd="${install_path_bin}/comby"
+
+        mv "${tool_cmd_version}" "${tool_cmd}"
+        chmod +x "${tool_cmd}"
+
         test -x "${tool_cmd}" || fail "Expected ${tool_cmd} to be executable."
 
-        if ! "${tool_cmd}" --help; then
-            fail "'${tool_cmd} --help' failed."
+        if ! "${tool_cmd}" -version; then
+            fail "'${tool_cmd} -version' failed."
         fi
 
-        echo "just $version installation was successful!"
+        echo "comby $version installation was successful!"
     ) || (
         rm -rf "$install_path"
-        fail "An error ocurred while installing just $version."
+        fail "An error ocurred while installing comby $version."
     )
 }

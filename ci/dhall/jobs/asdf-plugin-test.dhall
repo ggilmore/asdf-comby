@@ -2,8 +2,6 @@ let GitHubActions = (../imports.dhall).GitHubActions
 
 let Setup = ../setup.dhall
 
-let SetupSteps = Setup.SetupSteps
-
 let Job = Setup.Job
 
 in  Job::{
@@ -11,12 +9,13 @@ in  Job::{
     , strategy = Some GitHubActions.Strategy::{
       , matrix = toMap { os = [ "ubuntu-latest", "macos-latest" ] }
       }
+    , runs-on = GitHubActions.RunsOn.Type.`${{ matrix.os }}`
     , steps =
-          SetupSteps
+          Setup.ASDFSteps
         # [ GitHubActions.Step::{
             , name = Some "asdf-plugin-test"
             , uses = Some "asdf-vm/actions/plugin-test@v1.0.0"
-            , `with` = Some (toMap { command = "just --help" })
+            , `with` = Some (toMap { command = "comby -version" })
             , env = Some
                 (toMap { GITHUB_API_TOKEN = "\${{ secrets.GITHUB_TOKEN }}" })
             }

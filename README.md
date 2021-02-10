@@ -1,8 +1,8 @@
 <div align="center">
 
-# asdf-just ![CI](https://github.com/ggilmore/asdf-just/workflows/CI/badge.svg)
+# asdf-comby ![CI](https://github.com/ggilmore/asdf-comby/workflows/CI/badge.svg)
 
-[just](https://github.com/casey/just) plugin for the [asdf version manager](https://asdf-vm.com).
+[comby](https://github.com/comby-tools/comby) plugin for the [asdf version manager](https://asdf-vm.com).
 
 </div>
 
@@ -10,39 +10,37 @@
 
 - [Dependencies](#dependencies)
 - [Install](#install)
-- [Why?](#why)
 - [Contributing](#contributing)
 - [License](#license)
 
 # Dependencies
 
 - `bash`, `curl`, `tar`: generic POSIX utilities.
-- `SOME_ENV_VAR`: set this environment variable in your shell config to load the correct version of tool x.
 
 # Install
 
 Plugin:
 
 ```shell
-asdf plugin add just
+asdf plugin add comby
 # or
-asdf plugin add just https://github.com/ggilmore/asdf-just.git
+asdf plugin add comby https://github.com/ggilmore/asdf-comby.git
 ```
 
-just:
+comby:
 
 ```shell
 # Show all installable versions
-asdf list-all just
+asdf list-all comby
 
 # Install specific version
-asdf install just 0.7.2
+asdf install comby 1.0.0
 
 # Set a version globally (on your ~/.tool-versions file)
-asdf global just 0.7.2
+asdf global comby 1.0.0
 
-# Now just commands are available
-just --help
+# Now comby commands are available
+comby --help
 ```
 
 Check [asdf](https://github.com/asdf-vm/asdf) readme for more instructions on how to
@@ -52,7 +50,7 @@ install & manage versions.
 
 Contributions of any kind welcome! See the [contributing guide](contributing.md).
 
-[Thanks goes to these contributors](https://github.com/ggilmore/asdf-just/graphs/contributors)!
+[Thanks goes to these contributors](https://github.com/ggilmore/asdf-comby/graphs/contributors)!
 
 # License
 
