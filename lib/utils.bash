@@ -84,8 +84,13 @@ install_version() {
         tar -xzf "$release_file" -C "${install_path_bin}" || fail "Could not extract $release_file"
         rm "$release_file"
 
+        local tool_cmd_version
+        tool_cmd_version="${install_path_bin}/comby-${version}-${platform}"
+
         local tool_cmd
         tool_cmd="${install_path_bin}/comby"
+
+        mv "${tool_cmd_version}" "${tool_cmd}"
         test -x "${tool_cmd}" || fail "Expected ${tool_cmd} to be executable."
 
         if ! "${tool_cmd}" --help; then
