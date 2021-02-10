@@ -94,6 +94,8 @@ install_version() {
 
         mv "${tool_cmd_version}" "${tool_cmd}"
 
+        chmod +x "${tool_cmd}"
+
         ls -lah "${install_path_bin}"
 
         test -x "${tool_cmd}" || fail "Expected ${tool_cmd} to be executable."
