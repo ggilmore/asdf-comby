@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -euxo pipefail
+set -euo pipefail
 
 # TODO: Ensure this is the correct GitHub homepage where releases can be downloaded for comby.
 GH_REPO="https://github.com/comby-tools/comby"
@@ -90,13 +90,8 @@ install_version() {
         local tool_cmd
         tool_cmd="${install_path_bin}/comby"
 
-        ls -lah "${install_path_bin}"
-
         mv "${tool_cmd_version}" "${tool_cmd}"
-
         chmod +x "${tool_cmd}"
-
-        ls -lah "${install_path_bin}"
 
         test -x "${tool_cmd}" || fail "Expected ${tool_cmd} to be executable."
 
