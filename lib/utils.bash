@@ -90,11 +90,13 @@ install_version() {
         local tool_cmd
         tool_cmd="${install_path_bin}/comby"
 
+        ls -lah "${install_path_bin}"
+
         mv "${tool_cmd_version}" "${tool_cmd}"
         test -x "${tool_cmd}" || fail "Expected ${tool_cmd} to be executable."
 
-        if ! "${tool_cmd}" --help; then
-            fail "'${tool_cmd} --help' failed."
+        if ! "${tool_cmd}" -help; then
+            fail "'${tool_cmd} -help' failed."
         fi
 
         echo "comby $version installation was successful!"
