@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
+set -euxo pipefail
 
 # TODO: Ensure this is the correct GitHub homepage where releases can be downloaded for comby.
 GH_REPO="https://github.com/comby-tools/comby"
