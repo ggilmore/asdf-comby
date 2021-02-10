@@ -93,6 +93,9 @@ install_version() {
         ls -lah "${install_path_bin}"
 
         mv "${tool_cmd_version}" "${tool_cmd}"
+
+        ls -lah "${install_path_bin}"
+
         test -x "${tool_cmd}" || fail "Expected ${tool_cmd} to be executable."
 
         if ! "${tool_cmd}" -help; then
